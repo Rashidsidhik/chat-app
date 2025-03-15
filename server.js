@@ -2,7 +2,7 @@ import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-
+import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -22,7 +22,10 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
-
+app.use(cors({
+	origin: "https://chatthamz.netlify.app/", // Allow frontend domain or all (*)
+	credentials: true, // Allow cookies and auth headers
+}));
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 app.get("/test", (req, res) => {
 	res.send("okkkk");
