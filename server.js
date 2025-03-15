@@ -24,10 +24,14 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.get("/test", (req, res) => {
+	res.send("okkkk");
+});
 
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
 
 server.listen(PORT, () => {
 	connectToMongoDB();
